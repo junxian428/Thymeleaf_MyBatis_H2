@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <div th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div class="row">
+            <form th:object="${food}" th:action="@{/home}" th:method="POST">
+                <div class="mb-3">
+                    <label for="foodName">Food Name</label>
+                    <input th:field="*{name}" type="input" name="name" class="form-control" id="foodName" placeholder="Food Name">
+                </div>
+                <div class="mb-3">
+                    <label for="price">Price</label>
+                    <input th:field="*{price}" type="input" name="price" class="form-control" id="price" placeholder="Price">
+                </div>
+                <button class="btn btn-primary">Add</button>
+
+            </form>
+           
+        </div>
+
+        <div class="row">
+            
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Food Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="food,iterator : ${foods}">
+                    <td th:text="${iterator.index+ 1}"></td>
+                    <td th:text="${food.name}"></td>
+                    <td th:text="${food.price}"></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+     
+       
+    </div>
+</body>
+</html>
